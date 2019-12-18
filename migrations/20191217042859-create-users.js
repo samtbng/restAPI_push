@@ -20,6 +20,9 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+      avatar: {
+        type: Sequelize.STRING
+      },
       is_active: {
         type: Sequelize.BOOLEAN
       },
