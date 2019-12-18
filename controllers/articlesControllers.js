@@ -48,3 +48,13 @@ exports.lastest = (req, res) => {
     }).then(article => res.send(article))
         .catch(err => res.send(err))
 }
+
+exports.perCategory = (req, res) => {
+    const index = req.params.id
+    Article.findAll({
+        where: { category_id: index },
+        include: [{ model: category, as: "category" }]
+    })
+        .then(article => res.send(article))
+        .catch(err => res.send(err))
+}
