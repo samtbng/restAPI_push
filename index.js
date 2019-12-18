@@ -26,13 +26,15 @@ app.group("/api/v1", (router) => {
 
     router.post('/category', categoryControllers.create)
 
+    router.get('/category/:id/article', articlesControllers.perCategory)
+
     router.get('/articles', articlesControllers.index)
 
     router.post('/article', articlesControllers.create)
 
     router.get('/article/lastest', articlesControllers.lastest)
 
-    router.get('/category/:id/article', articlesControllers.perCategory)
+
 })
 
 //create the homepage route

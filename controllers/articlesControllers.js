@@ -50,11 +50,17 @@ exports.lastest = (req, res) => {
 }
 
 exports.perCategory = (req, res) => {
-    const index = req.params.id
     Article.findAll({
-        where: { category_id: index },
-        include: [{ model: category, as: "category" }]
+        where: { category_id: req.params.id },
+        include: [{
+            model: category,
+            as: "category"
+        }, {
+            model: users,
+            as: "users"
+        },]
     })
-        .then(article => res.send(article))
+        .then(data => res.send(data))
         .catch(err => res.send(err))
 }
+

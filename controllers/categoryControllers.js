@@ -1,11 +1,26 @@
 const models = require('../models')
 const cat = models.category
+const articles = models.articles
+const users = models.users
 
 exports.index = (req, res) => {
     cat.findAll({ attributes: ['id', 'name_category'] })
         .then(data => res.send(data))
         .catch(err => res.send(err))
 }
+
+exports.perCategory = (req, res) => {
+    cat.findOne({
+        where: { id: req.params.id },
+        include: [{
+            model: articles,
+            as: 'articles'
+        }]
+    })
+        .then(data => res.send(data))
+        .catch(err => res.send(err))
+}
+
 
 exports.create = (req, res) => {
     const input = req.body
