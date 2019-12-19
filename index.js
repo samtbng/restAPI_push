@@ -7,6 +7,8 @@ require('express-group-routes')
 //import controller
 const categoryControllers = require('./controllers/categoryControllers')
 const articlesControllers = require('./controllers/articlesControllers')
+const { authenticated } = require('./middleware')
+const AuthController = require('./controllers/authController')
 //use express in app variable
 const app = express()
 //define the server port
@@ -21,18 +23,24 @@ app.use(function (req, res, next) {
 });
 
 app.group("/api/v1", (router) => {
-
+    //task 1
     router.get('/categories', categoryControllers.index)
-
     router.post('/category', categoryControllers.create)
 
-    router.get('/category/:id/article', articlesControllers.perCategory)
-
+    //task 2
     router.get('/articles', articlesControllers.index)
-
-    router.post('/article', articlesControllers.create)
-
     router.get('/article/lastest', articlesControllers.lastest)
+
+    //task3 3
+    router.get('/category/:id/article', categoryControllers.perCategory)
+
+    //task 4
+    router.post('/article', authenticated, articlesControllers.create)
+    router.patch('/article', authenticated, articlesControllers.update)
+    router.delete('/article', authenticated, articlesControllers.update)
+
+    //login
+    router.post('/login', AuthController.login)
 
 
 })

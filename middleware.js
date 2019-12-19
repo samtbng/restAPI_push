@@ -1,11 +1,4 @@
-const isLogginIN = true
+const isLoggedIn = true
+const jwt = require('express-jwt')
 
-exports.authenticated = (req, res, next) => {
-    if (isLogginIn)
-        next()
-    else {
-        res.send({
-            message: "You Are Unauthenticated!"
-        })
-    }
-}
+exports.authenticated = jwt({ secret: 'dumbways' })

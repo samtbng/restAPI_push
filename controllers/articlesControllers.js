@@ -58,9 +58,37 @@ exports.perCategory = (req, res) => {
         }, {
             model: users,
             as: "users"
-        },]
+        },],
     })
         .then(data => res.send(data))
         .catch(err => res.send(err))
+}
+
+exports.update = (req, res) => {
+    const data = req.body
+    const index = req.params.id
+    console.log(data)
+    Article.update({
+        title: data.title,
+        category_id: data.category_id,
+        content: data.content,
+        img: data.img,
+        author_id: data.author_id
+    }, { where: { id: index } })
+        .then(todo => res.send(todo))
+        .catch(err => {
+            res.send(err)
+        })
+}
+
+exports.delete = (req, res) => {
+    const index = req.params.id
+    Article.destroy({
+        where: { id: index }
+    }).then(() => {
+        console.log("Menghapus Data berhasil")
+    }).catch(err => {
+        res.send(err)
+    })
 }
 

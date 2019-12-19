@@ -14,7 +14,12 @@ exports.perCategory = (req, res) => {
         where: { id: req.params.id },
         include: [{
             model: articles,
-            as: 'articles'
+            as: 'articles',
+            include: [{
+                model: users,
+                as: 'users'
+            }],
+            limit: 5,
         }]
     })
         .then(data => res.send(data))
