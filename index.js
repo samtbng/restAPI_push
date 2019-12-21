@@ -14,7 +14,7 @@ const usersController = require('./controllers/usersController')
 //use express in app variable
 const app = express()
 //define the server port
-const port = 8000
+const port = process.env.PORT || 5000
 //allow this app to receive incoming json request
 app.use(bodyParser.json())
 
@@ -63,7 +63,7 @@ app.group("/api/v1", (router) => {
 //create the homepage route
 app.get('/', (req, res) => {
     //res means respone, and it send string to the API
-    res.send('Hello Express')
+    res.send('Rest API Samuel Tobing Dumbways Batch 13')
 })
 
 app.listen(port, () => console.log(`listening on port ${port}!`))
